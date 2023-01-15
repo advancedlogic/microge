@@ -33,8 +33,8 @@
     micro.add("score", score);
 
     class Alien extends AnimatedSprite {
-      constructor(x, y) {
-        super(x, y);
+      constructor(x, y, bitmaps, delay) {
+        super(x, y, bitmaps, delay);
         this.direction = 1;
         this.nproj = 0;
         this.bitmaps = [
@@ -122,9 +122,9 @@
       micro.add(`alien${i}}`, alien);
     }
 
-    class SpaceShip extends Sprite {
-      constructor(x, y) {
-        super(x, y);
+    class SpaceShip extends AnimatedSprite {
+      constructor(x, y, bitmaps, delay) {
+        super(x, y, bitmaps, delay);
 
         this.stop = 0;
         this.left = 1;
@@ -137,7 +137,7 @@
 
         this.direction = this.stop;
 
-        this.bitmap = [
+        this.bitmaps = [[
           [0, 1, 0, 0, 0, 0, 1, 0],
           [0, 1, 0, 0, 0, 0, 1, 0],
           [0, 1, 0, 0, 0, 0, 1, 0],
@@ -145,15 +145,34 @@
           [0, 1, 1, 1, 1, 1, 1, 0],
           [0, 1, 0, 1, 1, 0, 1, 0],
           [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 0, 0, 1, 1, 0, 0, 0],
+        ],[
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 1, 1, 0, 1, 0],
           [0, 1, 1, 1, 1, 1, 1, 0],
-        ];
+          [0, 1, 0, 1, 1, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 0, 0, 0, 1, 0, 0, 0],
+        ],[
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 1, 0, 1, 1, 0, 1, 0],
+          [0, 1, 1, 1, 1, 1, 1, 0],
+          [0, 1, 0, 1, 1, 0, 1, 0],
+          [0, 1, 0, 0, 0, 0, 1, 0],
+          [0, 0, 0, 1, 0, 0, 0, 0],
+        ]];
       }
 
-      render(canvas) {
-        canvas.drawSprite(this.x, this.y, this.bitmap);
-      }
+      // render(canvas) {
+      //   canvas.drawSprite(this.x, this.y, this.bitmaps);
+      // }
 
       update(dt) {
+        super.update(dt);
         switch (this.direction) {
           //left
           case this.left:
@@ -231,7 +250,7 @@
       }
     }
 
-    const spaceship = new SpaceShip(60, 110);
+    const spaceship = new SpaceShip(60, 110, null, 50);
 
     micro.add("spaceship", spaceship);
     micro.loop();
